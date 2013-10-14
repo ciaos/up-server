@@ -75,13 +75,15 @@ Connection: keep-alive
 Range: bytes=0-30719/52227
 ```
 
-*   对于打文件和超大文件可以通过多次分片上传实现
+*   对于大文件和超大文件可以通过多次分片上传实现
 ```
 curl -F "action=upload" -F "Filedata=@big.file" -H "Range: bytes=0-102399/1024000000" -v "http://127.0.0.1/up.php"
 curl -F "action=upload" -F "Filedata=@big.file" -H "Range: bytes=102400-204799/1024000000" -v "http://127.0.0.1/up.php"
 curl -F "action=upload" -F "Filedata=@big.file" -H "Range: bytes=204800-303599/1024000000" -v "http://127.0.0.1/up.php"
 ...
 ```
+
+*   对读写分片信息加文件锁还可实现多线程上传
 
 Weibo Account
 -------------
