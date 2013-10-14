@@ -164,7 +164,7 @@ if (!empty($_FILES)) {
 
         fclose($r_fp);
         fclose($w_fp);
-	updateRange($targetFile.".range",$start,$pos-1,$size);
+	updateRange($targetFile.".range",$start,$end,$size);
 	list($start,$end,$size) = lookupRange($targetFile.".range");
 
         if("Not Found" === $start){
