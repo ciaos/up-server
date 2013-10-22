@@ -85,7 +85,7 @@ curl -F "action=upload" -F "Filedata=@big.file" -H "Range: bytes=204800-303599/1
 
 *   支持同时上传多个文件（不可与分片上传同时使用）
 ```
-curl -F "action=upload" -F "Filedata1=@nspclient.js" -F "Filedata2=@nspclient_test.js" -v "http://10.6.2.11/up.php"
+curl -F "action=upload" -F "Filedata1=@nspclient.js" -F "Filedata2=@nspclient_test.js" -v "http://127.0.0.1/up.php"
 * About to connect() to 127.0.0.1 port 80 (#0)
 *   Trying 127.0.0.1... connected
 * Connected to 127.0.0.1 (127.0.0.1) port 80 (#0)
