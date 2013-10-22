@@ -88,30 +88,30 @@ function lookupRange($rangefile){
     } else {
         $range = array_sort($data->range);
         $c = count($range);
-    if($c == 1 && $range[0][0] == 0 && $range[0][1]+1 == $data->totalsize){
-        return array("Created","","");
-    }
-    $start = 0;
-    $end = $data->totalsize-1;
-        for($i=0;$i<$c;$i++){
-        if($range[$i][0]<=$start){
-            $start = $range[$i][1];
-            if($i+1<$c){
-                $end = $range[$i+1][0]-1;
-            }
-        } else{
-            $end = $range[$i][0]-1;
+        if($c == 1 && $range[0][0] == 0 && $range[0][1]+1 == $data->totalsize){
+            return array("Created","","");
         }
-        break;
-    }
-    return array($start,$end,$data->totalsize);
+        $start = 0;
+        $end = $data->totalsize-1;
+        for($i=0;$i<$c;$i++){
+            if($range[$i][0]<=$start){
+                $start = $range[$i][1]+1;
+                if($i+1<$c){
+                    $end = $range[$i+1][0]-1;
+                }
+            } else{
+                $end = $range[$i][0]-1;
+            }
+            break;
+        }
+        return array($start,$end,$data->totalsize);
     }
 }
 
 if(!is_null(@$_SERVER['REQUEST_METHOD']) && @$_SERVER['REQUEST_METHOD'] == "HEAD"){
     if(is_null($_SERVER["HTTP_FILENAME"])){
         header("HTTP/1.0 400 Bad Request");
-    exit(-1);
+        exit(-1);
     }
     $filename = $_SERVER["HTTP_FILENAME"];
     list($start,$end,$size) = lookupRange(rtrim($_SERVER['DOCUMENT_ROOT'] . $targetFolder,'/')."/".$filename.".range");
